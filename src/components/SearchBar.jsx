@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const SearchBar = ({ setState }) => {
+const SearchBar = ({ setParentState }) => {
   const [matchResponse, setMatchResponse] = useState(false);
   // Stores the list of matching communes
   const [listeCommune, setListeCommune] = useState([]);
@@ -16,7 +17,7 @@ const SearchBar = ({ setState }) => {
   const handleSuggestionClick = (suggestion) => {
     setMatchResponse(!matchResponse);
     // send suggestion to parent component
-    setState(suggestion);
+    setParentState(suggestion);
   };
 
   useEffect(() => {
@@ -64,17 +65,19 @@ const SearchBar = ({ setState }) => {
           required
           onChange={handleChange}
         />
-        <ul className="absolute z-10 w-[350px] px-4 rounded-md shadow-lg">
+        <ul className="absolute bg-white z-10 w-[350px] px-4 rounded-md shadow-lg">
           {/* Render the suggestion list if there is a match */}
           {matchResponse &&
             listeCommune[0].map((item, index) => (
-              <li
-                className="py-4 hover:bg-blue-300 cursor-pointer rounded-md"
-                key={index}
-                onClick={() => handleSuggestionClick(item)}
-              >
-                {item.codePostal} - {item.nomCommune}
-              </li>
+              <Link key={index} to="/atlas">
+                <li
+                  className="py-4 hover:bg-blue-300 cursor-pointer rounded-md"
+                  key={index}
+                  onClick={() => handleSuggestionClick(item)}
+                >
+                  {item.codePostal} - {item.nomCommune}
+                </li>
+              </Link>
             ))}
         </ul>
       </div>
