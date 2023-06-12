@@ -66,6 +66,13 @@ const DataDisplay = ({ parentState }) => {
           {parentState.codePostal} - {parentState.nomCommune}
         </h1>
 
+        {!clickedService && (
+          <div className="animate-pulse font-bold text-3xl text-center w-full mt-[200px]">
+            {" "}
+            Sélectionner le service recherché
+          </div>
+        )}
+
         {/* Affiche les données relatives au service sélectionné */}
         {clickedService && (
           <div className="px-12">
