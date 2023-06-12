@@ -9,7 +9,10 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home setParentState={setParentState} />} />
+        <Route
+          path="/Annuaire"
+          element={<Home setParentState={setParentState} />}
+        />
         <Route path="/atlas" element={<Atlas parentState={parentState} />} />
       </Routes>
     </div>
